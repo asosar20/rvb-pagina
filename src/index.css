@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+    /* Definimos fuentes base */
+    --font-poppins: "Poppins", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* Fuentes aplicadas a distintos usos */
+    --font-title: var(--font-poppins);
+    /* Para títulos */
+    --font-body: var(--font-roboto);
+    /* Para texto descriptivo */
+    --font-button: var(--font-poppins);
+    /* Para botones */
+    --font-number: var(--font-mono);
+    /* Para números */
+
+    /* Pesos sugeridos */
+    --font-weight-title: 700;
+    /* bold */
+    --font-weight-body: 400;
+    /* normal */
+    --font-weight-button: 600;
+    /* semibold */
+    --font-weight-number: 500;
+    /* medium */
+}
