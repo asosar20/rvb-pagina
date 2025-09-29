@@ -9,7 +9,7 @@ const Hero = () => {
             items-center 
             text-center
             px-8
-            pt-20
+            pt-24
             md:px-20
             "
         >
@@ -145,3 +145,4 @@ const Hero = () => {
 }
 
 export default Hero
+
