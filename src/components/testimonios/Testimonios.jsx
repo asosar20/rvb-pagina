@@ -66,7 +66,7 @@ const Testimonios = () => {
                                 <img
                                     src={t.img}
                                     alt={t.nombre}
-                                    loading="lazy"
+                                    loading="eager"
                                     className="w-12 h-12 rounded-full object-cover"
                                 />
                                 <div>
@@ -83,3 +83,4 @@ const Testimonios = () => {
 }
 
 export default Testimonios
+
