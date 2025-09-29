@@ -55,7 +55,7 @@ const Nosotros = () => {
                     <img
                         src="/img/equipo.webp"
                         alt="Equipo de la constructora"
-                        loading="lazy"
+                        loading="eager"
                         className="rounded-2xl shadow-lg object-cover w-full h-[400px]"
                     />
                 </div>
@@ -65,3 +65,4 @@ const Nosotros = () => {
 }
 
 export default Nosotros
+
