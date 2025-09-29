@@ -32,7 +32,7 @@ const Header = () => {
                     items-center 
                     gap-2
                     ">
-                    <img src="/img/logo.webp" alt="Logo empresa"
+                    <img src="/img/logo.png" alt="Logo empresa"
                         loading="lazy"
                         className="
                         h-10
@@ -72,3 +72,4 @@ const Header = () => {
 }
 
 export default Header
+
