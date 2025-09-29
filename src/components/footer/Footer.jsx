@@ -8,7 +8,7 @@ const Footer = () => {
 
                 <div className="flex flex-col gap-4">
                     <a href="#hero" className="flex items-center justify-center gap-2 mb-6">
-                        <img src="/img/logo.webp" alt="Logo empresa" className="h-10" />
+                        <img src="/img/logo.png" alt="Logo empresa" className="h-10" />
                         <span className="font-bold text-xl font-title text-gray-100">Constructora</span>
                     </a>
                     <p className="text-gray-400 text-sm text-center italic">
@@ -60,3 +60,4 @@ const Footer = () => {
 }
 
 export default Footer
+
