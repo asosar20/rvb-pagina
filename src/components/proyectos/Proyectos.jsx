@@ -109,7 +109,7 @@ const Proyectos = () => {
                                 <img
                                     src={p.img}
                                     alt={p.titulo}
-                                    loading="lazy"
+                                    loading="eager"
                                     className="w-full h-full object-cover transition duration-500 hover:scale-105"
                                 />
                             </div>
@@ -159,3 +159,4 @@ const Proyectos = () => {
 }
 
 export default Proyectos;
+
