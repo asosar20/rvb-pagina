@@ -144,7 +144,11 @@ const Proyectos = () => {
                                 </div>
 
                                 <a
-                                    href="#contacto"
+                                    href={`https://wa.me/51907981164?text=${encodeURIComponent(
+                                        `Hola, deseo información de ${p.titulo}`
+                                    )}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="px-5 py-2 block bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-center font-button"
                                 >
                                     Solicitar información
@@ -159,4 +163,5 @@ const Proyectos = () => {
 }
 
 export default Proyectos;
+
 
