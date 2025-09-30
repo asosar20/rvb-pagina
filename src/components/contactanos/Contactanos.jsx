@@ -19,18 +19,15 @@ const Contactanos = () => {
         });
     };
 
-    // 🔎 Validaciones
     const validate = () => {
         const newErrors = {};
 
-        // Nombre
         if (!formData.nombre.trim()) {
             newErrors.nombre = "El nombre es obligatorio";
         } else if (formData.nombre.trim().length < 3) {
             newErrors.nombre = "El nombre debe tener al menos 3 caracteres";
         }
 
-        // Teléfono (formato Perú)
         const telefonoRegex = /^(?:\+51\s?)?9\d{8}$/;
         if (!formData.telefono.trim()) {
             newErrors.telefono = "El teléfono es obligatorio";
@@ -39,12 +36,10 @@ const Contactanos = () => {
                 "El teléfono debe ser válido (ej: +51 9XXXXXXXX o 9XXXXXXXX)";
         }
 
-        // Correo (opcional pero válido)
         if (formData.correo.trim() && !/\S+@\S+\.\S+/.test(formData.correo)) {
             newErrors.correo = "El correo debe ser válido";
         }
 
-        // Mensaje
         if (!formData.mensaje.trim()) {
             newErrors.mensaje = "El mensaje es obligatorio";
         }
@@ -56,7 +51,7 @@ const Contactanos = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!validate()) return; // ⛔ no pasa validación
+        if (!validate()) return;
 
         setLoading(true);
 
@@ -104,8 +99,8 @@ const Contactanos = () => {
                                 placeholder="Tu nombre"
                                 required
                                 className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.nombre
-                                        ? "border-red-500 focus:ring-red-500"
-                                        : "border-gray-400 focus:ring-indigo-500"
+                                    ? "border-red-500 focus:ring-red-500"
+                                    : "border-gray-400 focus:ring-indigo-500"
                                     }`}
                             />
                             {errors.nombre && (
@@ -125,8 +120,8 @@ const Contactanos = () => {
                                 onChange={handleChange}
                                 placeholder="ejemplo@correo.com"
                                 className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.correo
-                                        ? "border-red-500 focus:ring-red-500"
-                                        : "border-gray-400 focus:ring-indigo-500"
+                                    ? "border-red-500 focus:ring-red-500"
+                                    : "border-gray-400 focus:ring-indigo-500"
                                     }`}
                             />
                             {errors.correo && (
@@ -147,8 +142,8 @@ const Contactanos = () => {
                                 placeholder="+51 9XXXXXXXX"
                                 required
                                 className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.telefono
-                                        ? "border-red-500 focus:ring-red-500"
-                                        : "border-gray-400 focus:ring-indigo-500"
+                                    ? "border-red-500 focus:ring-red-500"
+                                    : "border-gray-400 focus:ring-indigo-500"
                                     }`}
                             />
                             {errors.telefono && (
@@ -168,8 +163,8 @@ const Contactanos = () => {
                                 placeholder="Escribe tu mensaje aquí..."
                                 required
                                 className={`w-full border rounded-lg px-4 py-2 h-32 focus:outline-none focus:ring-2 ${errors.mensaje
-                                        ? "border-red-500 focus:ring-red-500"
-                                        : "border-gray-400 focus:ring-indigo-500"
+                                    ? "border-red-500 focus:ring-red-500"
+                                    : "border-gray-400 focus:ring-indigo-500"
                                     }`}
                             />
                             {errors.mensaje && (
