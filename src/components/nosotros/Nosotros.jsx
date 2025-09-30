@@ -4,6 +4,7 @@ const Nosotros = () => {
     return (
         <section id="nosotros" className=" 
             px-8
+            md:pt-36
             pt-20
             text-center
             md:px-20
@@ -65,4 +66,5 @@ const Nosotros = () => {
 }
 
 export default Nosotros
+
 
