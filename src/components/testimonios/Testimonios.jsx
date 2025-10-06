@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
 
 const testimonios = [
     {
@@ -37,50 +37,69 @@ const testimonios = [
         lugar: "Chiclayo",
         img: "/img/cliente.webp",
     },
-]
+];
 
 const Testimonios = () => {
+    const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % testimonios.length);
+        }, 5000); // Cambia cada 5 segundos
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section
             id="testimonios"
-            className="
-            px-8
-            pt-20
-            md:px-20
-            text-center
-            bg-gradient-to-r from-indigo-50 via-white to-indigo-100"
+            className="px-4 pt-20 pb-16 md:px-20 bg-gradient-to-r from-indigo-50 via-white to-indigo-100"
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-center flex-col">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-title">
+            <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-4xl md:text-5xl font-bold text-[#0F70B7] mb-10 font-title">
                     Lo que dicen nuestros clientes
                 </h2>
 
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {testimonios.map((t, i) => (
-                        <div
-                            key={i}
-                            className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-left border border-gray-300"
-                        >
-                            <p className="text-gray-700 mb-6 italic">“{t.texto}”</p>
-                            <div className="flex items-center gap-4">
+                <div className="relative overflow-hidden w-full h-auto">
+                    <div
+                        className="flex transition-transform duration-700 ease-in-out"
+                        style={{ transform: `translateX(-${current * 100}%)` }}
+                    >
+                        {testimonios.map((t, i) => (
+                            <div
+                                key={i}
+                                className="flex-shrink-0 w-full px-4 flex flex-col items-center justify-center"
+                            >
                                 <img
                                     src={t.img}
                                     alt={t.nombre}
-                                    loading="eager"
-                                    className="w-12 h-12 rounded-full object-cover"
+                                    className="w-20 h-20 rounded-full object-cover border-4 border-[#0F70B7] shadow-md mb-4"
                                 />
-                                <div>
-                                    <p className="font-semibold text-gray-900">{t.nombre}</p>
-                                    <p className="text-gray-500 text-sm">{t.lugar}</p>
-                                </div>
+                                <p className="text-lg italic text-gray-700 max-w-2xl mb-4">
+                                    “{t.texto}”
+                                </p>
+                                <p className="font-semibold text-[#0F70B7] text-lg">
+                                    {t.nombre}
+                                </p>
+                                <p className="text-gray-500">{t.lugar}</p>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    {/* Indicadores */}
+                    <div className="flex justify-center mt-6 space-x-2">
+                        {testimonios.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setCurrent(i)}
+                                className={`w-3 h-3 rounded-full transition-all ${current === i ? "bg-[#0F70B7] w-6" : "bg-gray-300"
+                                    }`}
+                            ></button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Testimonios
-
+export default Testimonios;

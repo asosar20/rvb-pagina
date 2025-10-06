@@ -1,13 +1,14 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import React, { useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
+import { Building2 } from "lucide-react";
 
 const Contactanos = () => {
     const [formData, setFormData] = useState({
         nombre: "",
-        correo: "",
         telefono: "",
-        mensaje: "",
+        dni: "",
+        correo: "",
     });
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -33,15 +34,18 @@ const Contactanos = () => {
             newErrors.telefono = "El teléfono es obligatorio";
         } else if (!telefonoRegex.test(formData.telefono.trim())) {
             newErrors.telefono =
-                "El teléfono debe ser válido (ej: +51 9XXXXXXXX o 9XXXXXXXX)";
+                "Debe ser válido (ej: +51 9XXXXXXXX o 9XXXXXXXX)";
+        }
+
+        const dniRegex = /^\d{8}$/;
+        if (!formData.dni.trim()) {
+            newErrors.dni = "El DNI es obligatorio";
+        } else if (!dniRegex.test(formData.dni.trim())) {
+            newErrors.dni = "Debe tener 8 dígitos";
         }
 
         if (formData.correo.trim() && !/\S+@\S+\.\S+/.test(formData.correo)) {
             newErrors.correo = "El correo debe ser válido";
-        }
-
-        if (!formData.mensaje.trim()) {
-            newErrors.mensaje = "El mensaje es obligatorio";
         }
 
         setErrors(newErrors);
@@ -50,163 +54,165 @@ const Contactanos = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!validate()) return;
 
         setLoading(true);
-
         const { error } = await supabase.from("contactos").insert([formData]);
-
         if (error) {
-            console.error("❌ Error:", error);
+            console.error("Error:", error);
             alert("Hubo un problema al enviar el formulario");
         } else {
             alert("✅ Formulario enviado correctamente");
-            setFormData({ nombre: "", correo: "", telefono: "", mensaje: "" });
+            setFormData({ nombre: "", telefono: "", dni: "", correo: "" });
         }
         setLoading(false);
     };
 
     return (
-        <section
-            id="contacto"
-            className="px-8 pt-20 md:px-20 text-center bg-gradient-to-r from-indigo-50 via-white to-indigo-100"
-        >
+        <section id="contacto" className="px-8 pt-32 pb-32 md:px-20 text-center bg-white">
             <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-title">
-                    Contáctanos
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">
+                    ¡Quiero conocer más de Arena Blanca – Chiclayo!
                 </h2>
-                <p className="text-gray-700 mb-6">
-                    Completa el formulario y nuestro equipo se pondrá en contacto contigo
-                    lo antes posible.
-                </p>
             </div>
 
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-8">
                 {/* FORMULARIO */}
-                <div className="md:w-1/2">
-                    <form onSubmit={handleSubmit} className="flex flex-col text-left">
-                        {/* Nombre */}
-                        <div className="flex flex-col mb-4">
-                            <label className="text-gray-700 mb-1 font-medium">
-                                Nombre <span className="text-red-500">*</span>
-                            </label>
+                <div className="md:w-1/2 bg-[#F3F9F5] p-6 rounded-2xl shadow-xl">
+                    <p className="text-gray-700 mb-6 font-button">
+                        Déjanos tus datos y un asesor se contactará contigo lo antes posible.
+                    </p>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
+
+                        {/* NOMBRES Y APELLIDOS */}
+                        <div className="relative">
                             <input
                                 type="text"
                                 name="nombre"
                                 value={formData.nombre}
                                 onChange={handleChange}
-                                placeholder="Tu nombre"
+                                placeholder=" "
                                 required
-                                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.nombre
-                                    ? "border-red-500 focus:ring-red-500"
-                                    : "border-gray-400 focus:ring-indigo-500"
-                                    }`}
+                                className={`peer w-full border rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:ring-2 transition-all bg-white
+                  ${errors.nombre ? "border-red-500 focus:ring-red-500" : "border-gray-400 focus:ring-indigo-500"}`}
                             />
-                            {errors.nombre && (
-                                <span className="text-red-500 text-sm">{errors.nombre}</span>
-                            )}
+                            <label
+                                htmlFor="nombre"
+                                className={`absolute left-4 font-button transition-all duration-200 ease-in-out pointer-events-none text-xs
+                  ${formData.nombre
+                                        ? "top-2 text-xs text-gray-600"
+                                        : "top-6 text-base text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-600"}`}
+                            >
+                                NOMBRES Y APELLIDOS <span className="text-red-500">*</span>
+                            </label>
+                            {errors.nombre && <span className="text-red-500 text-xs mt-1 block">{errors.nombre}</span>}
                         </div>
 
-                        {/* Correo */}
-                        <div className="flex flex-col mb-4">
-                            <label className="text-gray-700 mb-1 font-medium">
-                                Correo (opcional)
-                            </label>
+                        {/* TELÉFONO Y DNI */}
+                        <div className="flex flex-row gap-4">
+                            {/* Teléfono */}
+                            <div className="relative flex-1">
+                                <input
+                                    type="tel"
+                                    name="telefono"
+                                    value={formData.telefono}
+                                    onChange={handleChange}
+                                    placeholder=" "
+                                    required
+                                    className={`peer w-full border rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:ring-2 transition-all bg-white
+                    ${errors.telefono ? "border-red-500 focus:ring-red-500" : "border-gray-400 focus:ring-indigo-500"}`}
+                                />
+                                <label
+                                    htmlFor="telefono"
+                                    className={`absolute left-4 font-button transition-all duration-200 ease-in-out pointer-events-none text-xs
+                    ${formData.telefono
+                                            ? "top-2 text-xs text-gray-600"
+                                            : "top-6 text-base text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-600"}`}
+                                >
+                                    TELÉFONO <span className="text-red-500">*</span>
+                                </label>
+                                {errors.telefono && <span className="text-red-500 text-xs mt-1 block">{errors.telefono}</span>}
+                            </div>
+
+                            {/* DNI */}
+                            <div className="relative flex-1">
+                                <input
+                                    type="text"
+                                    name="dni"
+                                    value={formData.dni}
+                                    onChange={handleChange}
+                                    placeholder=" "
+                                    required
+                                    className={`peer w-full border rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:ring-2 transition-all bg-white
+                    ${errors.dni ? "border-red-500 focus:ring-red-500" : "border-gray-400 focus:ring-indigo-500"}`}
+                                />
+                                <label
+                                    htmlFor="dni"
+                                    className={`absolute left-4 font-button transition-all duration-200 ease-in-out pointer-events-none text-xs
+                    ${formData.dni
+                                            ? "top-2 text-xs text-gray-600"
+                                            : "top-6 text-base text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-600"}`}
+                                >
+                                    DNI <span className="text-red-500">*</span>
+                                </label>
+                                {errors.dni && <span className="text-red-500 text-xs mt-1 block">{errors.dni}</span>}
+                            </div>
+                        </div>
+
+                        {/* EMAIL */}
+                        <div className="relative">
                             <input
                                 type="email"
                                 name="correo"
                                 value={formData.correo}
                                 onChange={handleChange}
-                                placeholder="ejemplo@correo.com"
-                                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.correo
-                                    ? "border-red-500 focus:ring-red-500"
-                                    : "border-gray-400 focus:ring-indigo-500"
-                                    }`}
+                                placeholder=" "
+                                className={`peer w-full border rounded-lg px-4 pt-5 pb-3 focus:outline-none focus:ring-2 transition-all bg-white
+                  ${errors.correo ? "border-red-500 focus:ring-red-500" : "border-gray-400 focus:ring-indigo-500"}`}
                             />
-                            {errors.correo && (
-                                <span className="text-red-500 text-sm">{errors.correo}</span>
-                            )}
-                        </div>
-
-                        {/* Teléfono */}
-                        <div className="flex flex-col mb-4">
-                            <label className="text-gray-700 mb-1 font-medium">
-                                Teléfono <span className="text-red-500">*</span>
+                            <label
+                                htmlFor="correo"
+                                className={`absolute left-4 font-button transition-all duration-200 ease-in-out pointer-events-none text-xs
+                  ${formData.correo
+                                        ? "top-2 text-xs text-gray-600"
+                                        : "top-6 text-base text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-indigo-600"}`}
+                            >
+                                EMAIL (opcional)
                             </label>
-                            <input
-                                type="tel"
-                                name="telefono"
-                                value={formData.telefono}
-                                onChange={handleChange}
-                                placeholder="+51 9XXXXXXXX"
-                                required
-                                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${errors.telefono
-                                    ? "border-red-500 focus:ring-red-500"
-                                    : "border-gray-400 focus:ring-indigo-500"
-                                    }`}
-                            />
-                            {errors.telefono && (
-                                <span className="text-red-500 text-sm">{errors.telefono}</span>
-                            )}
+                            {errors.correo && <span className="text-red-500 text-xs mt-1 block">{errors.correo}</span>}
                         </div>
 
-                        {/* Mensaje */}
-                        <div className="flex flex-col mb-4">
-                            <label className="text-gray-700 mb-1 font-medium">
-                                Mensaje <span className="text-red-500">*</span>
-                            </label>
-                            <textarea
-                                name="mensaje"
-                                value={formData.mensaje}
-                                onChange={handleChange}
-                                placeholder="Escribe tu mensaje aquí..."
-                                required
-                                className={`w-full border rounded-lg px-4 py-2 h-32 focus:outline-none focus:ring-2 ${errors.mensaje
-                                    ? "border-red-500 focus:ring-red-500"
-                                    : "border-gray-400 focus:ring-indigo-500"
-                                    }`}
-                            />
-                            {errors.mensaje && (
-                                <span className="text-red-500 text-sm">{errors.mensaje}</span>
-                            )}
+                        {/* Botón */}
+                        <div className="flex justify-center">
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="inline-flex bg-[#0F70B7] text-white px-20 py-4 rounded-lg transition-transform duration-300 hover:scale-105 font-button disabled:opacity-60"
+                            >
+                                {loading ? "Enviando..." : "Solicitar información"}
+                            </button>
                         </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full bg-indigo-600 text-white px-5 py-2 rounded-lg 
-                hover:bg-indigo-700 transition-transform duration-300 
-                hover:scale-105 font-button mb-6 disabled:opacity-60"
-                        >
-                            {loading ? "Enviando..." : "Enviar"}
-                        </button>
                     </form>
                 </div>
 
                 {/* INFO */}
-                <div className="flex flex-col justify-center md:text-left mb-6 md:w-1/2">
-                    <div className="mb-6 w-full h-80">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.4961801727093!2d-79.83768193278188!3d-6.771713216128401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904cef29db2532b9%3A0x6dc479fdb7b7e814!2s7%20de%20Enero%20%23740%2C%20Chiclayo%2014001!5e0!3m2!1ses!2spe!4v1758302053424!5m2!1ses!2spe"
-                            className="w-full h-full rounded-lg shadow"
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe>
-                    </div>
+                <div className="flex flex-col items-center justify-center md:items-start px-8 gap-6 md:w-1/2">
+                    {/* Contenido */}
+                    <div className="flex flex-col gap-2 font-body">
+                        <h3 className="flex items-center text-md md:text-2xl font-bold text-gray-900 font-title gap-2 pb-6">
+                            <Building2 className="w-6 h-6 text-[#0F70B7]" />
+                            Nuestro Proyecto Estrella: Arena Blanca
+                        </h3>
 
-                    <p className="text-gray-700 mb-5 flex flex-col ">
-                        <span className="flex items-center gap-2 mb-2">
-                            <MapPin className="w-5 h-5" /> Dirección: 7 de Enero #740, Chiclayo
-                        </span>
-                        <span className="flex items-center gap-2 mb-2">
-                            <Phone className="w-5 h-5" /> Teléfono: +51 123 456 789
-                        </span>
-                        <span className="flex items-center gap-2 mb-2">
-                            <Mail className="w-5 h-5" /> Correo: info@constructora.com
-                        </span>
-                    </p>
+                        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-start">
+                            Arena Blanca es nuestro proyecto más ambicioso y con mayor proyección. Ubicado a solo minutos de Pimentel, combina{" "}
+                            <span className="font-semibold">naturaleza, recreación y plusvalía</span> en un solo lugar.
+                        </p>
+
+                        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-start">
+                            Disfruta de <span className="font-semibold">parques, áreas deportivas y espacios para toda la familia</span>, diseñados para brindar confort y calidad de vida. Su planificación moderna lo convierte en una <span className="font-semibold">excelente inversión</span>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
