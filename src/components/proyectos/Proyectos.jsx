@@ -52,7 +52,7 @@ const Proyectos = () => {
         return (
             <div className="flex-shrink-0 w-full md:w-1/2 flex flex-col rounded-xl shadow-2xl">
                 {/* Tabs */}
-                <div className="flex px-20">
+                <div className="flex px-20 gap-4">
                     {["galeria", "caracteristicas"].map(t => (
                         <div
                             key={t}
@@ -162,7 +162,7 @@ const Proyectos = () => {
                             <div className="flex justify-between w-full gap-4 pb-2">
                                 <div className="flex flex-col">
                                     <span className="pb-2 font-title">Cuota desde</span>
-                                    <span className="font-numbers text-lg">{tipo2Pisos.cuotaDesde}</span>
+                                    <span className="font-numbers text-sm md:text-lg">{tipo2Pisos.cuotaDesde}</span>
                                     <span className="text-[#0F70B7] border-[#0F70B7] border font-bold text-center py-1 rounded-full w-36 mt-2 text-xs font-title">
                                         SEPARA CON {tipo2Pisos.separacion}
                                     </span>
@@ -214,7 +214,7 @@ const Proyectos = () => {
                                 <div className="flex justify-between w-full gap-4 pb-2">
                                     <div className="flex flex-col">
                                         <span className="pb-2 font-title">Cuota desde</span>
-                                        <span className="font-numbers text-lg">{subtipoSeleccionado.cuotaDesde}</span>
+                                        <span className="font-numbers text-sm md:text-lg">{subtipoSeleccionado.cuotaDesde}</span>
                                         <span className="text-[#0F70B7] border-[#0F70B7] border font-bold text-center py-1 rounded-full w-36 mt-2 text-xs font-title">
                                             SEPARA CON {subtipoSeleccionado.separacion}
                                         </span>
