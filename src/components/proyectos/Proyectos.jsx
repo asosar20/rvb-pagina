@@ -157,12 +157,12 @@ const Proyectos = () => {
                             </span>
                             <div className="flex justify-between w-full text-gray-800 border-b pb-4 border-gray-300">
                                 <span className="font-title">Precio al contado desde</span>
-                                <span className="font-semibold font-numbers text-2xl">{tipo2Pisos.precioContado}</span>
+                                <span className="font-semibold font-numbers md:text-2xl text-xl">{tipo2Pisos.precioContado}</span>
                             </div>
                             <div className="flex justify-between w-full gap-4 pb-2">
                                 <div className="flex flex-col">
                                     <span className="pb-2 font-title">Cuota desde</span>
-                                    <span className="font-numbers text-xl">{tipo2Pisos.cuotaDesde}</span>
+                                    <span className="font-numbers text-lg">{tipo2Pisos.cuotaDesde}</span>
                                     <span className="text-[#0F70B7] border-[#0F70B7] border font-bold text-center py-1 rounded-full w-36 mt-2 text-xs font-title">
                                         SEPARA CON {tipo2Pisos.separacion}
                                     </span>
@@ -209,12 +209,12 @@ const Proyectos = () => {
                                 </span>
                                 <div className="flex justify-between w-full text-gray-800 border-b pb-4 border-gray-300">
                                     <span className="font-title">Precio al contado desde</span>
-                                    <span className="font-semibold font-numbers text-2xl">{subtipoSeleccionado.precioContado}</span>
+                                    <span className="font-semibold font-numbers  md:text-2xl text-xl">{subtipoSeleccionado.precioContado}</span>
                                 </div>
                                 <div className="flex justify-between w-full gap-4 pb-2">
                                     <div className="flex flex-col">
                                         <span className="pb-2 font-title">Cuota desde</span>
-                                        <span className="font-numbers text-xl">{subtipoSeleccionado.cuotaDesde}</span>
+                                        <span className="font-numbers text-lg">{subtipoSeleccionado.cuotaDesde}</span>
                                         <span className="text-[#0F70B7] border-[#0F70B7] border font-bold text-center py-1 rounded-full w-36 mt-2 text-xs font-title">
                                             SEPARA CON {subtipoSeleccionado.separacion}
                                         </span>
