@@ -4,12 +4,12 @@ import { Phone } from "lucide-react";
 
 export default function Ubicacion() {
     return (
-        <section id="ubicacion" className="bg-[#F4FAF7] py-12 px-4">
+        <section id="ubicacion" className="bg-[#F4FAF7] px-8 md:pt-24 pt-20 md:pb-24 pb-20 text-center">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
 
                 {/* ENCABEZADO */}
                 <div className="text-center md:text-left">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">
                         Tu futuro hogar te espera aquí
                     </h2>
                     <p className="text-gray-700 mb-1">
@@ -37,7 +37,7 @@ export default function Ubicacion() {
                             7 de Enero #740 - Chiclayo.
                         </p>
                         <a
-                            href="https://www.google.com/maps/place/Villa+Posada+del+Sol+Chiclayo"
+                            href="https://maps.app.goo.gl/eocGce1gG5XQ8xFD6"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="border border-[#0F70B7] text-[#0F70B7] hover:bg-[#0F70B7] hover:text-white px-4 py-2 rounded-md transition flex items-center gap-2"
@@ -58,7 +58,7 @@ export default function Ubicacion() {
                             Alt. km 1.5 carretera a Pimentel
                         </p>
                         <a
-                            href="https://www.google.com/maps"
+                            href="https://maps.app.goo.gl/1p71eTcxMK816hCj9"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="border border-[#0F70B7] text-[#0F70B7] hover:bg-[#0F70B7] hover:text-white px-4 py-2 rounded-md transition flex items-center gap-2"
@@ -74,16 +74,12 @@ export default function Ubicacion() {
             </div>
 
             <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg pt-10">
-                <iframe
-                    title="Ubicación"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.5800144651245!2d-79.8434929!3d-6.7570888999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904d68e3774170a3%3A0x7e67cbb2a5476d34!2sVilla%20Posada%20del%20Sol%20Chiclayo!5e0!3m2!1ses-419!2spe!4v1699980000000!5m2!1ses-419!2spe"
-                    width="100%"
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3952614225814!2d-79.93674892543781!3d-6.8431275931550575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904cfb4cb62d47a3%3A0x76d0608bbc883728!2sRESIDENCIAL%20ARENA%20BLANCA!5e0!3m2!1ses-419!2spe!4v1759763626856!5m2!1ses-419!2spe" width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                    referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
     );

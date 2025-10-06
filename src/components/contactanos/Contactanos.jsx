@@ -69,7 +69,7 @@ const Contactanos = () => {
     };
 
     return (
-        <section id="contacto" className="px-8 pt-32 pb-32 md:px-20 text-center bg-white">
+        <section id="contacto" className="px-8 md:pt-32 pt-20 md:pb-32 pb-20 md:px-20 text-center bg-white">
             <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">
                     ¡Quiero conocer más de Arena Blanca – Chiclayo!

@@ -52,10 +52,10 @@ const Testimonios = () => {
     return (
         <section
             id="testimonios"
-            className="px-4 pt-20 pb-16 md:px-20 bg-gradient-to-r from-indigo-50 via-white to-indigo-100"
+            className="px-8 md:pt-24 pt-20 md:pb-32 md:px-20 text-center bg-gradient-to-r from-[#F3F9F5] via-white to-[#EEF3FF]"
         >
-            <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-4xl md:text-5xl font-bold text-[#0F70B7] mb-10 font-title">
+            <div className="max-w-4xl mx-auto text-center md:pb-0 pb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">
                     Lo que dicen nuestros clientes
                 </h2>
 

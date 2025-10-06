@@ -26,7 +26,7 @@ const Header = () => {
                     <a href="#proyectos" className={claseNav}>Proyectos</a>
                     <a href="#ubicacion" className={claseNav}>Ubicación</a>
                     <a href="#testimonios" className={claseNav}>Testimonios</a>
-                    <a href="#contacto" className="bg-[#0F70B7] px-5 py-4 text-gray-100 font-button font-bold shadow-xl rounded-xl transition-transform duration-300 hover:scale-105">Cotiza aquí</a>
+                    <a href="#contacto" className="bg-[#F6B800] px-5 py-4 text-gray-100 font-button font-bold shadow-xl rounded-xl transition-transform duration-300 hover:scale-105">Cotiza aquí</a>
                 </nav>
 
                 <button
@@ -44,7 +44,7 @@ const Header = () => {
                         { id: "beneficios", text: "Beneficios" },
                         { id: "proyectos", text: "Proyectos" },
                         { id: "ubicacion", text: "Ubicación" },
-                        { id: "nosotros", text: "Nosotros" },
+                        // { id: "nosotros", text: "Nosotros" },
                         { id: "testimonios", text: "Testimonios" },
                         { id: "contacto", text: "Contacto" },
                     ].map(({ id, text }) => (

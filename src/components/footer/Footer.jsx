@@ -45,7 +45,7 @@ const Footer = () => {
                     <h4 className="font-semibold text-white text-lg font-title">Agenda tu visita</h4>
                     <a
                         href="#contacto"
-                        className="inline-block bg-indigo-600 text-white px-5 py-2 font-button rounded-lg hover:bg-indigo-700 transition-transform duration-300 hover:scale-105"
+                        className="inline-block bg-indigo-600 text-white px-6 py-4 font-button rounded-lg hover:bg-indigo-700 transition-transform duration-300 hover:scale-105"
                     >
                         Contáctanos
                     </a>
