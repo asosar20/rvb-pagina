@@ -57,7 +57,7 @@ const Proyectos = () => {
                         <div
                             key={t}
                             onClick={() => setTab(prev => ({ ...prev, [tipoCasa]: t }))}
-                            className={`cursor-pointer flex-1 text-center py-3 font-title text-base relative
+                            className={`cursor-pointer flex-1 text-center py-3 font-title md:text-base relative text-sm
                 ${tab[tipoCasa] === t ? "text-[#0F70B7] font-semibold" : "text-gray-500"}`}
                         >
                             {t === "galeria" ? "Galería" : "Características"}
