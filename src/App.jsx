@@ -1,8 +1,6 @@
-import { Menu, X, Facebook, Instagram, Phone } from "lucide-react"
 import Hero from "./components/hero/Hero"
 import Beneficios from "./components/beneficios/Beneficios"
 import Proyectos from "./components/proyectos/Proyectos"
-import Nosotros from "./components/nosotros/Nosotros"
 import Testimonios from "./components/testimonios/Testimonios"
 import Contactanos from "./components/contactanos/Contactanos"
 import Footer from "./components/footer/Footer"
@@ -22,7 +20,6 @@ function App() {
       <Visita />
       <Contactanos />
       <Ubicacion />
-      {/* <Nosotros /> */}
       <Testimonios />
       <Footer />
       <Whatsapp />
