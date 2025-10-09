@@ -55,7 +55,7 @@ const Testimonios = () => {
                     </div>
 
                     {/* Indicadores */}
-                    <div className="flex justify-center mt-4 mb-2 space-x-2">
+                    <div className="flex justify-center mt-4 mb-10 space-x-2">
                         {testimoniosData.map((_, i) => (
                             <button
                                 key={i}
