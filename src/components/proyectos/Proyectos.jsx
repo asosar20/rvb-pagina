@@ -122,7 +122,7 @@ const Proyectos = () => {
     const subtipoSeleccionado = tipo1Piso.subtipo.find(s => s.id === subtipo1Piso);
 
     return (
-        <section id="proyectos" className="px-8 pt-20 md:pb-32 md:px-20 text-center bg-white">
+        <section id="proyectos" className="px-8 pt-20 md:pt-24 md:pb-32 md:px-20 text-center bg-white">
             <div className="max-w-7xl mx-auto pb-8 md:pb-0">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">Nuestros Proyectos</h2>
 

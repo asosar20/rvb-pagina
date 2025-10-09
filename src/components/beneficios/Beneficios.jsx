@@ -4,7 +4,7 @@ const Beneficios = () => {
     return (
         <section
             id="beneficios"
-            className="bg-[#F3F9F5] px-8 pt-20 pb-24 md:px-20 text-center"
+            className="bg-[#F3F9F5] px-8 pt-20 md:pt-24 pb-24 md:px-20 text-center"
         >
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 font-title">

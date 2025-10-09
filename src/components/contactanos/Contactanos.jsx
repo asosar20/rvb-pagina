@@ -10,9 +10,11 @@ const Contactanos = () => {
         dni: "",
         correo: "",
     });
+
+    const [message, setMessage] = useState("")
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-
+    const [showMessage, setShowMessage] = useState(false);
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -59,14 +61,26 @@ const Contactanos = () => {
         setLoading(true);
         const { error } = await supabase.from("contactos").insert([formData]);
         if (error) {
-            console.error("Error:", error);
-            alert("Hubo un problema al enviar el formulario");
+            // console.error("Error:", error);
+            setMessage("Hubo un problema al enviar el formulario")
+            // alert("Hubo un problema al enviar el formulario");
         } else {
-            alert("✅ Formulario enviado correctamente");
+            setMessage("Formulario enviado correctamente")
+            // alert("✅ Formulario enviado correctamente");
             setFormData({ nombre: "", telefono: "", dni: "", correo: "" });
         }
+
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 5000);
+
         setLoading(false);
+
+
+
     };
+
 
     return (
         <section id="contacto" className="px-8 md:pt-32 pt-20 md:pb-32 pb-20 md:px-20 text-center bg-white">
@@ -192,13 +206,23 @@ const Contactanos = () => {
                                 {loading ? "Enviando..." : "Solicitar información"}
                             </button>
                         </div>
+                        <div
+                            className={`transition-opacity duration-500 mt-4 text-sm font-medium p-2 rounded text-center
+    ${showMessage ? "opacity-100" : "opacity-0 pointer-events-none h-0 overflow-hidden"}
+    ${message.includes("correctamente")
+                                    ? "text-green-700 bg-green-100"
+                                    : "text-red-700 bg-red-100"}`}
+                        >
+                            {message}
+                        </div>
+
                     </form>
                 </div>
 
                 {/* INFO */}
-                <div className="flex flex-col items-center justify-center md:items-start px-8 gap-6 md:w-1/2">
+                <div className="flex flex-col items-center justify-center md:items-start px-8 gap-6 md:w-1/2 font-title">
                     {/* Contenido */}
-                    <div className="flex flex-col gap-2 font-body">
+                    <div className="flex flex-col gap-2">
                         <h3 className="flex items-center text-md md:text-2xl font-bold text-gray-900 font-title gap-2 pb-6">
                             <Building2 className="w-6 h-6 text-[#0F70B7]" />
                             Nuestro Proyecto Estrella: Arena Blanca
