@@ -18,7 +18,7 @@ const Visita = () => {
 
                 {/* Botón */}
                 <div>
-                    <a href="#contacto" className="bg-[#FFA500] hover:bg-[#FF8C00] transition px-12 py-5 rounded-lg font-semibold font-button">
+                    <a href="#contacto" className="bg-[#F6B800] hover:bg-[#ffbf00] transition px-12 py-5 rounded-lg font-semibold font-button">
                         Agendar visita
                     </a>
                 </div>
