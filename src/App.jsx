@@ -10,21 +10,23 @@ import Visita from "./components/visita/Visita"
 import Ubicacion from "./components/ubicacion/Ubicacion"
 
 function App() {
-
   return (
     <div className="font-title">
       <Header />
-      <Hero />
-      <Beneficios />
-      <Proyectos />
-      <Visita />
-      <Contactanos />
-      <Ubicacion />
-      <Testimonios />
+      <main>
+        <Hero />
+        <Beneficios />
+        <Proyectos />
+        <Visita />
+        <Contactanos />
+        <Ubicacion />
+        <Testimonios />
+      </main>
       <Footer />
       <Whatsapp />
     </div>
   )
 }
+
 
 export default App

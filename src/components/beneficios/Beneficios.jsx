@@ -1,6 +1,27 @@
+import { useEffect } from "react";
 import { beneficios } from "../../data/beneficioData";
 
 const Beneficios = () => {
+    useEffect(() => {
+        const elements = document.querySelectorAll(".animate-fadeInUp");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        elements.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <section
             id="beneficios"
@@ -16,7 +37,7 @@ const Beneficios = () => {
                         <div
                             key={index}
                             className="bg-white w-full max-w-sm rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-8 text-center animate-fadeInUp"
-                            style={{ animationDelay: `${index * 0.08}s` }}
+                            style={{ animationDelay: `${index * 0.1}s` }}
                         >
                             <div className="w-14 h-14 flex items-center justify-center bg-[#0F70B7] text-white rounded-full mx-auto mb-4 shadow">
                                 <b.Icon size={26} />

@@ -1,16 +1,18 @@
-import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { proyectosData } from "../../data/proyectoData";
+import { ChevronDown } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { proyectosData } from "../../data/proyectoData"
 
 const Proyectos = () => {
-    const [tipoCasa, setTipoCasa] = useState("2pisos");
-    const [subtipo1Piso, setSubtipo1Piso] = useState("tipoA");
-    const [tab, setTab] = useState({ "2pisos": "galeria", "1piso": "galeria" });
-    const [activeAccordion, setActiveAccordion] = useState({});
-    const [currentImage, setCurrentImage] = useState({});
+    const [tipoCasa, setTipoCasa] = useState("2pisos")
+    const [subtipo1Piso, setSubtipo1Piso] = useState("tipoA")
+    const [tab, setTab] = useState({ "2pisos": "galeria", "1piso": "galeria" })
+    const [activeAccordion, setActiveAccordion] = useState({})
+    const [currentImage, setCurrentImage] = useState({})
+    const sectionRef = useRef(null)
+    const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-        const intervalIds = {};
+        const intervalIds = {}
         proyectosData.tipos.forEach(tipo => {
             if (tipo.id === "1piso") {
                 tipo.subtipo.forEach(sub => {
@@ -19,37 +21,51 @@ const Proyectos = () => {
                             setCurrentImage(prev => ({
                                 ...prev,
                                 [`1piso-${sub.id}`]: ((prev[`1piso-${sub.id}`] || 0) + 1) % sub.imagenes.length,
-                            }));
-                        }, 3000);
+                            }))
+                        }, 3000)
                     }
-                });
+                })
             } else {
                 if (tab[tipo.id] === "galeria") {
                     intervalIds[tipo.id] = setInterval(() => {
                         setCurrentImage(prev => ({
                             ...prev,
                             [tipo.id]: ((prev[tipo.id] || 0) + 1) % tipo.imagenes.length,
-                        }));
-                    }, 3000);
+                        }))
+                    }, 3000)
                 }
             }
-        });
+        })
+        return () => Object.values(intervalIds).forEach(clearInterval)
+    }, [tab])
 
-        return () => Object.values(intervalIds).forEach(clearInterval);
-    }, [tab]);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true)
+                        observer.unobserve(entry.target)
+                    }
+                })
+            },
+            { threshold: 0.2 }
+        )
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
 
     const toggleAccordion = (key, titulo) => {
         setActiveAccordion(prev => ({
             ...prev,
             [key]: prev[key] === titulo ? null : titulo,
-        }));
-    };
+        }))
+    }
 
     const TabsGaleriaCaracteristicas = ({ data, tipoKey }) => {
-        const currentIdx = currentImage[tipoKey] || 0;
+        const currentIdx = currentImage[tipoKey] || 0
         return (
-            <div className="flex-shrink-0 w-full md:w-1/2 flex flex-col rounded-xl shadow-2xl">
-                {/* Tabs */}
+            <div className={`flex-shrink-0 w-full md:w-1/2 flex flex-col rounded-xl shadow-2xl transition-all duration-700`}>
                 <div className="flex px-20 gap-4">
                     {["galeria", "caracteristicas"].map(t => (
                         <div
@@ -66,7 +82,6 @@ const Proyectos = () => {
                     ))}
                 </div>
 
-                {/* Contenido */}
                 {tab[tipoCasa] === "galeria" && (
                     <div className="relative flex flex-col items-center justify-center p-3">
                         <div className="w-full h-56 overflow-hidden rounded-lg">
@@ -114,20 +129,25 @@ const Proyectos = () => {
                     </div>
                 )}
             </div>
-        );
-    };
+        )
+    }
 
-    const tipo2Pisos = proyectosData.tipos.find(t => t.id === "2pisos");
-    const tipo1Piso = proyectosData.tipos.find(t => t.id === "1piso");
-    const subtipoSeleccionado = tipo1Piso.subtipo.find(s => s.id === subtipo1Piso);
+    const tipo2Pisos = proyectosData.tipos.find(t => t.id === "2pisos")
+    const tipo1Piso = proyectosData.tipos.find(t => t.id === "1piso")
+    const subtipoSeleccionado = tipo1Piso.subtipo.find(s => s.id === subtipo1Piso)
 
     return (
-        <section id="proyectos" className="px-8 pt-20 md:pt-24 md:pb-32 md:px-20 text-center bg-white">
+        <section
+            id="proyectos"
+            ref={sectionRef}
+            className="px-8 pt-20 md:pt-24 md:pb-32 md:px-20 text-center bg-white"
+        >
             <div className="max-w-7xl mx-auto pb-8 md:pb-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title">Nuestros Proyectos</h2>
+                <h2 className={`text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-title transition-all duration-700 ${isVisible ? "animate-fadeInUp show" : ""}`}>
+                    Nuestros Proyectos
+                </h2>
 
-                {/* --- Botones tipo de casa --- */}
-                <div className="flex justify-center gap-3 mb-6">
+                <div className={`flex justify-center gap-3 mb-6 transition-all duration-700 ${isVisible ? "animate-fadeInUp show" : ""}`}>
                     {[
                         { id: "2pisos", label: "Casa de 2 pisos" },
                         { id: "1piso", label: "Casa de 1 piso" },
@@ -145,10 +165,9 @@ const Proyectos = () => {
                     ))}
                 </div>
 
-                {/* --- Vista Casa de 2 pisos --- */}
                 {tipoCasa === "2pisos" && (
                     <div className="flex flex-col md:flex-row justify-between gap-6 py-6">
-                        <div className="flex-1 flex flex-col items-start gap-3 text-start">
+                        <div className={`flex-1 flex flex-col items-start gap-3 text-start transition-all duration-700 ${isVisible ? "animate-slideInLeft" : ""}`}>
                             <span className="font-title font-bold text-2xl">{tipo2Pisos.titulo}</span>
                             <span className="border-b w-full pb-4 text-gray-700 border-gray-300 font-title">
                                 Casa de: {tipo2Pisos.areaConstruida} | Terreno de: {tipo2Pisos.areaTerreno}
@@ -179,11 +198,9 @@ const Proyectos = () => {
                     </div>
                 )}
 
-                {/* --- Vista Casa de 1 piso --- */}
                 {tipoCasa === "1piso" && (
                     <div className="flex flex-col gap-6 py-6">
-                        {/* Tabs A/B */}
-                        <div className="flex w-full justify-center mb-4">
+                        <div className={`flex w-full justify-center mb-4 transition-all duration-700 ${isVisible ? "animate-fadeInUp show" : ""}`}>
                             {tipo1Piso.subtipo.map(st => (
                                 <div
                                     key={st.id}
@@ -200,14 +217,14 @@ const Proyectos = () => {
                         </div>
 
                         <div className="flex flex-col md:flex-row justify-between gap-6">
-                            <div className="flex-1 flex flex-col items-start gap-3 text-start">
+                            <div className={`flex-1 flex flex-col items-start gap-3 text-start transition-all duration-700 ${isVisible ? "animate-slideInLeft" : ""}`}>
                                 <span className="font-title font-bold text-2xl">{subtipoSeleccionado.titulo}</span>
                                 <span className="border-b w-full pb-4 text-gray-700 border-gray-300 font-title">
                                     Casa de: {subtipoSeleccionado.areaConstruida} | Terreno de: {subtipoSeleccionado.areaTerreno}
                                 </span>
                                 <div className="flex justify-between w-full text-gray-800 border-b pb-4 border-gray-300">
                                     <span className="font-title">Precio al contado desde</span>
-                                    <span className="font-semibold font-numbers  md:text-2xl text-xl">{subtipoSeleccionado.precioContado}</span>
+                                    <span className="font-semibold font-numbers md:text-2xl text-xl">{subtipoSeleccionado.precioContado}</span>
                                 </div>
                                 <div className="flex justify-between w-full gap-4 pb-2">
                                     <div className="flex flex-col">
@@ -233,7 +250,7 @@ const Proyectos = () => {
                 )}
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default Proyectos;
+export default Proyectos

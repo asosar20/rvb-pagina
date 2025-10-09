@@ -65,11 +65,16 @@ body {
     transform: translateY(0);
   }
 }
-
+/* Estado inicial */
 .animate-fadeInUp {
-  animation: fadeInUp 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 0;
+  transform: translateY(100px);
 }
 
+/* Cuando entra en pantalla */
+.animate-fadeInUp.show {
+  animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
 /* Fade In sutil */
 @keyframes fadeIn {
   from {

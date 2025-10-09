@@ -5,7 +5,7 @@ const Hero = () => {
     return (
         <section
             id="hero"
-            className="min-h-screen bg-[#F3F9F5 ] flex items-center px-6 pt-24 md:px-20"
+            className="min-h-screen bg-[#F3F9F5] flex items-center px-6 pt-24 md:px-20"
         >
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
 
@@ -23,7 +23,7 @@ const Hero = () => {
                     {/* --- ICONOS --- */}
                     <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto md:mx-0">
 
-                        {/* 📍 Dirección */}
+                        {/* Dirección */}
                         <div
                             className="flex flex-col items-center justify-center bg-[#0F70B7] rounded-xl shadow-md p-4 text-center transition-transform duration-300 hover:scale-105 animate-slideInLeft"
                             style={{ animationDelay: "0.1s" }}
@@ -34,7 +34,7 @@ const Hero = () => {
                             </span>
                         </div>
 
-                        {/* 📐 Área mínima */}
+                        {/* Área mínima */}
                         <div
                             className="flex flex-col items-center justify-center bg-white rounded-xl shadow-md p-4 text-center border-[#0F70B7] border transition-transform duration-300 hover:scale-105 animate-slideInLeft"
                             style={{ animationDelay: "0.2s" }}
@@ -45,7 +45,7 @@ const Hero = () => {
                             </span>
                         </div>
 
-                        {/* 💰 Cuota */}
+                        {/*  Cuota */}
                         <div
                             className="flex flex-col items-center justify-center bg-[#0F70B7] rounded-xl shadow-md p-4 text-center transition-transform duration-300 hover:scale-105 animate-slideInLeft"
                             style={{ animationDelay: "0.3s" }}
@@ -62,15 +62,18 @@ const Hero = () => {
                         <a
                             href="#contacto"
                             className="bg-[#0F70B7] text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105 font-button px-6 py-4 animate-fadeInUp"
+                            style={{ animationDelay: "0.4s" }}
                         >
                             Agenda tu visita
                         </a>
                         <a
                             href="#proyectos"
                             className="border bg-white text-[#0F70B7] border-[#0F70B7] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 font-button px-6 py-4 animate-fadeInUp"
+                            style={{ animationDelay: "0.5s" }}
                         >
                             Ver proyectos
                         </a>
+
                     </div>
                 </div>
 
