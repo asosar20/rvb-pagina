@@ -9,7 +9,6 @@ const Proyectos = () => {
     const [activeAccordion, setActiveAccordion] = useState({});
     const [currentImage, setCurrentImage] = useState({});
 
-    // --- Carrusel automático ---
     useEffect(() => {
         const intervalIds = {};
         proyectosData.tipos.forEach(tipo => {
@@ -46,7 +45,6 @@ const Proyectos = () => {
         }));
     };
 
-    // ✅ Subcomponente Tabs galería/características reutilizable
     const TabsGaleriaCaracteristicas = ({ data, tipoKey }) => {
         const currentIdx = currentImage[tipoKey] || 0;
         return (
@@ -137,7 +135,7 @@ const Proyectos = () => {
                         <button
                             key={btn.id}
                             onClick={() => setTipoCasa(btn.id)}
-                            className={`border px-6 py-4 rounded-xl font-button transition-colors duration-300
+                            className={`border px-6 py-4 rounded-xl font-button transition-colors duration-300 cursor-pointer
                 ${tipoCasa === btn.id
                                     ? "bg-[#0F70B7] text-white border-[#0F70B7]"
                                     : "border-[#0F70B7] text-[#0F70B7] hover:bg-[#0F70B7] hover:text-white"}`}
@@ -149,7 +147,7 @@ const Proyectos = () => {
 
                 {/* --- Vista Casa de 2 pisos --- */}
                 {tipoCasa === "2pisos" && (
-                    <div className="flex flex-col md:flex-row items-start justify-between gap-6 p-6">
+                    <div className="flex flex-col md:flex-row justify-between gap-6 py-6">
                         <div className="flex-1 flex flex-col items-start gap-3 text-start">
                             <span className="font-title font-bold text-2xl">{tipo2Pisos.titulo}</span>
                             <span className="border-b w-full pb-4 text-gray-700 border-gray-300 font-title">
@@ -183,7 +181,7 @@ const Proyectos = () => {
 
                 {/* --- Vista Casa de 1 piso --- */}
                 {tipoCasa === "1piso" && (
-                    <div className="flex flex-col gap-6 p-6">
+                    <div className="flex flex-col gap-6 py-6">
                         {/* Tabs A/B */}
                         <div className="flex w-full justify-center mb-4">
                             {tipo1Piso.subtipo.map(st => (
@@ -201,7 +199,7 @@ const Proyectos = () => {
                             ))}
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+                        <div className="flex flex-col md:flex-row justify-between gap-6">
                             <div className="flex-1 flex flex-col items-start gap-3 text-start">
                                 <span className="font-title font-bold text-2xl">{subtipoSeleccionado.titulo}</span>
                                 <span className="border-b w-full pb-4 text-gray-700 border-gray-300 font-title">
