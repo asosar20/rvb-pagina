@@ -1,10 +1,13 @@
 import React from 'react'
 
 const Whatsapp = () => {
+
+    const numeroWhatsapp = 51907981164
+
     return (
         <div>
             <a
-                href="https://wa.me/51907981164"
+                href={`https://wa.me/${numeroWhatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg transition-transform duration-300 hover:scale-110 z-50"
@@ -20,4 +23,3 @@ const Whatsapp = () => {
 }
 
 export default Whatsapp
-
